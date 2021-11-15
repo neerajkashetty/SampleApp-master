@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView,Image } from 'react-native';
 
 const Task = (props) => {
 
@@ -10,7 +10,8 @@ const Task = (props) => {
         <View style={styles.square}></View>
         <Text style={styles.itemText}>{props.text}</Text>
       </View>
-      <View style={styles.circular}></View>
+      {/* <View style={styles.circular}></View> */}
+      <View ><Image style={styles.image1} source={require('../assets/delete.png')}></Image></View>
     </View>
     </KeyboardAvoidingView>
   )
@@ -49,6 +50,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
   },
+
+  image1:{
+    width: 20,
+    height: 20,
+    // borderColor: '#55BCF6',
+    // borderWidth: 2,
+    // borderRadius: 5,
+  }
 });
 
 export default Task;

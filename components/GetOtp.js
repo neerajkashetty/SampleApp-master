@@ -28,7 +28,8 @@ const optionalConfigObject = {
     color: "ffffff", // Android,
     fallbackLabel: "Show Passcode" // iOS (if empty, then label is hidden)
   }
-  function touchIdAuth    (){
+  
+  function touchIdAuth () {
     TouchID.isSupported()
       .then(biometryType => {
         // Success code
@@ -412,7 +413,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     
-        linearGradient: {height: deviceHeight,width: 411,},
+        linearGradient: {height: deviceHeight,width: "100%",},
         Icon_Style: {
           shadowRadius: 5,
           borderRadius: 20,

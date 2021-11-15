@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight:'bold'
     },
-    linearGradient: {height: deviceHeight,width: 411,},
+    linearGradient: {height: deviceHeight,width: "100%",},
     Icon_Style: {
       shadowRadius: 5,
       borderRadius: 20,

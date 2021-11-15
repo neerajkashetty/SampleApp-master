@@ -188,23 +188,7 @@ const Tabs = () => {
                                 />
                             );
 
-                            case "Notes":
-                            return (
-                                <Image
-                                    source={require('./assets/add.png')}
-                                    resizeMode="contain"
-                                    style={{
-                                        tintColor: tintColor,
-                                        width: 45,
-                                        height: 45,
-                                        
-                                        
-                                    }}
-                                    
-  
-                                />
-                            );
-
+                            
 
 
                       
@@ -243,12 +227,7 @@ const Tabs = () => {
               options={{headerShown:false}}
           />
 
-            <Tab.Screen
-              name="Notes"
-              component={Note}
-              options={{headerShown:false}}
-          />
-
+            
 
 
 

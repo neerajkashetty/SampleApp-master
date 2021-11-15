@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import Task from '../components/Task';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Note() {
   const [task, setTask] = useState();
@@ -19,6 +20,7 @@ export default function Note() {
   }
 
   return (
+    <LinearGradient start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}} colors={[/* '#8a9a5b','#e6ffc9','#9ab973', */'#ffcc99','#ffcccc' ]} style={styles.linearGradient}>
     <View style={styles.container}>
       {/* Added this scroll view to enable scrolling when list gets longer than the page */}
       <ScrollView
@@ -53,7 +55,7 @@ export default function Note() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.writeTaskWrapper}
       >
-        <TextInput style={styles.input} placeholder={'Write a task'} value={task} onChangeText={text => setTask(text)} />
+        <TextInput style={styles.input} placeholder={'Write a task'} placeholderTextColor="#ff9966" value={task} onChangeText={text => setTask(text)} />
         <TouchableOpacity onPress={() => handleAddTask()}>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}>+</Text>
@@ -62,13 +64,14 @@ export default function Note() {
       </KeyboardAvoidingView>
       
     </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E8EAED',
+    // backgroundColor: '#e63ca',
   },
   tasksWrapper: {
     paddingTop: 80,
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   input: {
     paddingVertical: 15,
@@ -108,5 +111,12 @@ const styles = StyleSheet.create({
     borderColor: '#C0C0C0',
     borderWidth: 1,
   },
-  addText: {},
+
+  linearGradient: {height:'100%',width: '100%'},
+  addText: {
+     fontSize:50,
+     color:'#ff9966',
+     bottom:7
+      
+  },
 });

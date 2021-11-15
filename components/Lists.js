@@ -162,8 +162,8 @@ const ListScreen = (props) => {
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ height: 70, width: 70, borderRadius: 20, bottom: 75, left: 4 }} source={require('../assets/add.png')}></Image>
-          <Text style={{ bottom:68, left: 14, fontWeight: 'bold', color: '#013220' }}>NOTES</Text>
+          <Image style={{ height:60, width:60, borderRadius: 1, bottom: 75, left: 13 }} source={require('../assets/Text.png')}></Image>
+          <Text style={{ bottom:55, left: 14, fontWeight: 'bold', color: '#013220' }}>NOTES</Text>
 
         </TouchableOpacity>
 
