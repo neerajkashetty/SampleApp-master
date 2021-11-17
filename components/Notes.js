@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, Alert } from 'react-native';
 import Task from '../components/Task';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function Note() {
-  const [task, setTask] = useState();
+  const [text, setText] = useState();
   const [taskItems, setTaskItems] = useState([]);
+  const [count,setCount]=useState();
 
+
+  
   const handleAddTask = () => {
     Keyboard.dismiss();
-    setTaskItems([...taskItems, task])
-    setTask(null);
+    setTaskItems([...taskItems, text])
+    setText(null);
   }
 
   const completeTask = (index) => {
@@ -55,8 +58,15 @@ export default function Note() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.writeTaskWrapper}
       >
-        <TextInput style={styles.input} placeholder={'Write a task'} placeholderTextColor="#ff9966" value={task} onChangeText={text => setTask(text)} />
-        <TouchableOpacity onPress={() => handleAddTask()}>
+        <TextInput style={styles.input} placeholder={'Write a task'} placeholderTextColor="#ff9966" value={text} onChangeText={text => setText(text)} />
+        <TouchableOpacity
+        onPress={() =>{ if(text.length>0){
+          handleAddTask();
+        }
+        else Alert.alert('Enter Something');
+        
+      }      
+        }>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}>+</Text>
           </View>

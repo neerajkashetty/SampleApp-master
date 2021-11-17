@@ -12,6 +12,7 @@ import {
   TextInput,
   ActivityIndicator
 } from "react-native"
+import TabNavigator from "react-native-tab-navigator";
 
 const Dev_Height = Dimensions.get("window").height
 const Dev_Width = Dimensions.get("window").width

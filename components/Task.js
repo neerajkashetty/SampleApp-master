@@ -11,7 +11,7 @@ const Task = (props) => {
         <Text style={styles.itemText}>{props.text}</Text>
       </View>
       {/* <View style={styles.circular}></View> */}
-      <View ><Image style={styles.image1} source={require('../assets/delete.png')}></Image></View>
+      <View ><TouchableOpacity onPress={()=> completeTask(index)}><Image style={styles.image1} source={require('../assets/delete.png')}></Image></TouchableOpacity></View>
     </View>
     </KeyboardAvoidingView>
   )
