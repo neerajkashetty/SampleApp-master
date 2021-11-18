@@ -25,6 +25,8 @@ import Compass from './components/Compass';
 import AddItems from './components/Trail';
 import Note from './components/Notes';
 import Task from './components/Task';
+import Main from './components/MainQuiz';
+import { Quiz } from './components';
 
 
 const Stack = createNativeStackNavigator();
@@ -269,12 +271,9 @@ function App() {
          <Stack.Screen name='SignUpOtp' component={SignUpOtp} /> 
           <Stack.Screen name='Compass' component={Compass} />  
           <Stack.Screen name='AddItems' component={AddItems} /> 
-          <Stack.Screen name='Notes' component={Note} />
+          {/* <Stack.Screen name='Notes' component={Note} /> */}
           <Stack.Screen name='Tasks' component={Task} />
-
-
-
-
+          <Stack.Screen name='Quiz' component={Quiz}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -26,14 +26,14 @@ import {Svg} from 'react-native-svg';
 var currentDate = moment().format("ll");
 
 
-/*  class Expense extends React.Component{
-    constructor(props) {
-        super(props)
-    this.state = {
-        category_add:'',
-        category_added:'',
+//  class Expense extends React.Component{
+//     constructor(props) {
+//         super(props)
+//     this.state = {
+//         category_add:'',
+//         category_added:'',
 
-    } */
+//     } 
 
  
  const Expense = (props) => { 
@@ -823,7 +823,6 @@ var currentDate = moment().format("ll");
     }
 
     
-
     return (
         <View style={{ flex: 1, backgroundColor: "#d7e3a3" }}>
             {/* Nav bar section */}

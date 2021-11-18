@@ -1,132 +1,252 @@
-import React, {useState} from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, Alert } from 'react-native';
-import Task from '../components/Task';
-import LinearGradient from 'react-native-linear-gradient';
+import React from 'react';
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  TextInput,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Alert,Image,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import moment from 'moment';
+var currentDate =moment().format("MMM D,YYYY"); 
+//var currentTime = moment().format('LTS');
+const COLORS = {primary: '#1f145c', white: '#fff'};
 
-export default function Note() {
-  const [text, setText] = useState();
-  const [taskItems, setTaskItems] = useState([]);
-  const [count,setCount]=useState();
+const Todo = () => {
+  const [todos, setTodos] = React.useState([]);
+  const [textInput, setTextInput] = React.useState('');
 
+  React.useEffect(() => {
+    getTodosFromUserDevice();
+  }, []);
 
+  React.useEffect(() => {
+    saveTodoToUserDevice(todos);
+  }, [todos]);
+
+  const addTodo = () => {
+    if (textInput == '') {
+      Alert.alert('Error', 'Please input task');
+    } else {
+      const newTodo = {
+        id: Math.random(),
+        task: textInput,
+        completed: false,
+      };
+      setTodos([...todos, newTodo]);
+      setTextInput('');
+    }
+  };
+
+  const saveTodoToUserDevice = async todos => {
+    try {
+      const stringifyTodos = JSON.stringify(todos);
+      await AsyncStorage.setItem('todos', stringifyTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getTodosFromUserDevice = async () => {
+    try {
+      const todos = await AsyncStorage.getItem('todos');
+      if (todos != null) {
+        setTodos(JSON.parse(todos));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const markTodoComplete = todoId => {
+    const newTodosItem = todos.map(item => {
+      if (item.id == todoId) {
+        return {...item, completed: true};
+      }
+      return item;
+    });
+
+    setTodos(newTodosItem);
+  };
+
+  const deleteTodo = todoId => {
+    const newTodosItem = todos.filter(item => item.id != todoId);
+    setTodos(newTodosItem);
+  };
+
+  const clearAllTodos = () => {
+    Alert.alert('Confirm', 'Clear all tasks?', [
+      {
+        text: 'Yes',
+        onPress: () => setTodos([]),
+      },
+      {
+        text: 'No',
+      },
+    ]);
+  };
+  const formatDate = ms => {
+    const date = new Date(ms);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hrs = date.getHours();
+    const min = date.getMinutes();
+    const sec = date.getSeconds();
   
-  const handleAddTask = () => {
-    Keyboard.dismiss();
-    setTaskItems([...taskItems, text])
-    setText(null);
-  }
+    return `${day}/${month}/${year} - ${hrs}:${min}:${sec}`;
+  };
 
-  const completeTask = (index) => {
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy)
-  }
-
-  return (
-    <LinearGradient start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}} colors={[/* '#8a9a5b','#e6ffc9','#9ab973', */'#ffcc99','#ffcccc' ]} style={styles.linearGradient}>
-    <View style={styles.container}>
-      {/* Added this scroll view to enable scrolling when list gets longer than the page */}
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1
-        }}
-        keyboardShouldPersistTaps='handled'
-      >
-
-      {/* Today's Tasks */}
-      <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}>Today's tasks</Text>
-        <View style={styles.items}>
-          {/* This is where the tasks will go! */}
-          {
-            taskItems.map((item, index) => {
-              return (
-                <TouchableOpacity key={index}  onPress={() => completeTask(index)}>
-                  <Task text={item} /> 
-                </TouchableOpacity>
-              )
-            })
-          }
+  const ListItem = ({todo}) => {
+    return (
+      <View style={styles.listItem}>
+        <View style={{flex: 1}}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 15,
+              color: COLORS.primary,
+              textDecorationLine: todo?.completed ? 'line-through' : 'none',
+            }}>
+            {todo?.task}
+          </Text>
+         
+          <Text style={{color:'#1f145c'}}>{currentDate}</Text>
+          {/* <Text style={{color:'#1f145c'}}>{currentTime}</Text> */}
         </View>
-      </View>
-        
-      </ScrollView>
-
-      {/* Write a task */}
-      {/* Uses a keyboard avoiding view which ensures the keyboard does not cover the items on screen */}
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writeTaskWrapper}
-      >
-        <TextInput style={styles.input} placeholder={'Write a task'} placeholderTextColor="#ff9966" value={text} onChangeText={text => setText(text)} />
-        <TouchableOpacity
-        onPress={() =>{ if(text.length>0){
-          handleAddTask();
-        }
-        else Alert.alert('Enter Something');
-        
-      }      
-        }>
-          <View style={styles.addWrapper}>
-            <Text style={styles.addText}>+</Text>
+        {!todo?.completed && (
+          <TouchableOpacity onPress={() => markTodoComplete(todo.id)}>
+            <View style={[styles.actionIcon, {backgroundColor: 'green'}]}>
+              {/* <Icon name="done" size={20} color="white" /> */}
+              <Image  style={styles.image1}  source={require('../assets/add.png')}>
+          </Image>
+            </View>
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity onPress={() => deleteTodo(todo.id)}>
+          <View style={styles.actionIcon}>
+            {/* <Icon name="delete" size={20} color="white" /> */}
+            <Image  style={styles.image1}  source={require('../assets/delete.png')}>
+          </Image>
           </View>
         </TouchableOpacity>
-      </KeyboardAvoidingView>
-      
-    </View>
-    </LinearGradient>
+      </View>
+    );
+  };
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: '#b8f6fc',
+      }}>
+      <View style={styles.header}>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            fontSize: 20,
+            color: COLORS.primary,
+          }}>
+          Today's Task
+        </Text>
+        {/* <Icon name="delete" size={25} color="red" onPress={clearAllTodos} /> */}
+        <TouchableOpacity onPress={clearAllTodos}>
+        <Image  style={styles.image1}  source={require('../assets/delete.png')}  >
+          </Image>
+          </TouchableOpacity>
+      </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{padding: 20, paddingBottom: 100}}
+        data={todos}
+        renderItem={({item}) => <ListItem todo={item} />}
+      />
+
+      <View style={styles.footer}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={textInput}
+            placeholder="Add Task"
+            placeholderTextColor='#1f145c'
+            onChangeText={text => setTextInput(text)}
+          />
+        </View>
+        <TouchableOpacity onPress={addTodo}>
+          <View style={styles.iconContainer}>
+            {/* <Icon name="add" color="white" size={30} /> */}
+            <Image  style={styles.image1}  source={require('../assets/add.png')}>
+          </Image>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#e63ca',
-  },
-  tasksWrapper: {
-    paddingTop: 80,
-    paddingHorizontal: 20,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold'
-  },
-  items: {
-    marginTop: 30,
-  },
-  writeTaskWrapper: {
+  footer: {
     position: 'absolute',
-    bottom: 60,
+    bottom: 0,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
+    paddingHorizontal: 20,
+    backgroundColor: '#b8f6fc',
   },
-  input: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    backgroundColor: '#FFF',
-    borderRadius: 60,
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
-    width: 250,
+  inputContainer: {
+    height: 50,
+    paddingHorizontal: 20,
+    elevation: 40,
+    backgroundColor: '#f5d0a4',
+    flex: 1,
+    marginVertical: 20,
+    marginRight: 20,
+    borderRadius: 30,
   },
-  addWrapper: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#FFF',
-    borderRadius: 60,
+  iconContainer: {
+    height: 50,
+    width: 50,
+    backgroundColor: COLORS.primary,
+    elevation: 40,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
   },
 
-  linearGradient: {height:'100%',width: '100%'},
-  addText: {
-     fontSize:50,
-     color:'#ff9966',
-     bottom:7
-      
+  listItem: {
+    padding: 20,
+    backgroundColor: COLORS.white,
+    flexDirection: 'row',
+    elevation: 12,
+    borderRadius: 7,
+    marginVertical: 10,
   },
+  actionIcon: {
+    height: 25,
+    width: 25,
+    backgroundColor: COLORS.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    marginLeft: 5,
+    borderRadius: 3,
+  },
+  header: {
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  image1:{
+    width: 20,
+    height: 20,
+    // borderColor: '#55BCF6',
+    // borderWidth: 2,
+    // borderRadius: 5,
+  }
 });
+
+export default Todo;

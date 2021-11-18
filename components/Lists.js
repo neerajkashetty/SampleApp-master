@@ -26,15 +26,14 @@ const ListScreen = (props) => {
     <View style={{ flex: 10, flexDirection: 'column', backgroundColor: 'black' }}>
 
 
-<Text style={{borderWidth:5, borderColor:'black', height:50, width:60}} > Hello</Text>
+
 
       <View style={{ flex: 1.8, shadowColor: 'blue', borderWidth: 1, borderColor: 'black' }}>
-         <Image style={{ height: 260, width: 420, }} source={require('../assets/view.png')}>
+         <Image style={{ height: '150%', width: '100%', }} source={require('../assets/view.png')}>
 
         </Image> 
       {/*   <LinearGradient start={{ x: -0.5, y: 0.5 }} end={{ x: 1, y: 0 }} colors={['#6600ff', '#ccccff','#99ccff']} style={styles1.linearGradient} /> */}
        {/*  <Image style={{ height: 350, width: 420, }} source={require('../assets/BgImg.png')}>
-
         </Image> */}
         
       </View>
@@ -75,7 +74,7 @@ const ListScreen = (props) => {
         </View>
 
         <TouchableOpacity style={{
-          bottom: 130, left: '10%', width: 80, flexDirection: 'column', height: 80, shadowColor: 'blue', elevation: 10, borderWidth: 0, borderColor: 'lightblue',
+          bottom: '35%', left: '20%', width:'15%', flexDirection: 'column', height:'12%',  elevation: 10, borderWidth: 0, borderColor: 'lightblue', 
           borderRadius: 20
         }}
           onPress={() =>
@@ -86,14 +85,14 @@ const ListScreen = (props) => {
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ height: 50, width: 50, bottom: 65, left: 15, borderRadius: 20 }} source={require('../assets/newsTab.png')}></Image>
-          <Text style={{ left: 15, fontWeight: 'bold', color: '#013220', bottom: 48, borderWidth: 0, borderColor: 'lightblue' }}>News</Text>
+          <Image style={{ height:'80%', width: '80%', bottom: '85%', left:'8%', borderRadius: 20 }} source={require('../assets/newsTab.png')}></Image>
+          <Text style={{ left: '18%', fontWeight: 'bold', color: '#013220', bottom: '70%',fontSize:13 }}>News</Text>
         </TouchableOpacity>
 
 
         <TouchableOpacity onPress={() => props.navigation.navigate('QR')}
           style={{
-            bottom: 210, left: '40%', width: 80, flexDirection: 'column', height: 80, shadowColor: 'blue', elevation: 10, borderWidth: 0, borderColor: 'lightblue',
+            bottom: '47%',left:'42%' , width: '15%', flexDirection: 'column', height:'12%', elevation: 10, borderWidth: 0, borderColor: 'lightblue',
             borderRadius: 20
           }}>
           <NeomorphBlur
@@ -101,20 +100,20 @@ const ListScreen = (props) => {
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ height: 70, width: 70, borderRadius: 20, bottom: 75, left: 4 }} source={require('../assets/qr.png')}></Image>
-          <Text style={{ bottom:68, left: 14, fontWeight: 'bold', color: '#013220' }}>Scanner</Text>
+          <Image style={{ height:'80%', width: '80%', borderRadius: 20, bottom: '85%', left:'8%', }} source={require('../assets/qr.png')}></Image>
+          <Text style={{ bottom:'70%', left: '3%', fontWeight: 'bold', color: '#013220',fontSize:13 }}>Scanner</Text>
 
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.navigation.navigate('Weather')}
-          style={{ width: 80, height: 80, shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white', bottom: 290, left: '70%', borderRadius: 20, }}>
+          style={{ width: '15%', height: '12%', shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white', bottom:'59%', left: '64%', borderRadius: 20, }}>
           <NeomorphBlur
             darkShadowColor="#003300"
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ bottom: 75, left: 4,height: 79, width: 76, borderRadius: 20 }} source={require('../assets/weatherTab.png')}></Image>
-          <Text style={{ bottom:76, left: 15, fontWeight: 'bold', color: '#013220' }}>Weather</Text>
+          <Image style={{ bottom: '95%', right: '5%',height:'100%', width: '100%', borderRadius: 20 }} source={require('../assets/weatherTab.png')}></Image>
+          <Text style={{ bottom:'86%', left: '3%', fontWeight: 'bold', color: '#013220',fontSize:13 }}>Weather</Text>
         </TouchableOpacity>
 
 
@@ -125,20 +124,24 @@ const ListScreen = (props) => {
 
         {/* <View style={{ fexDirection:'row', borderWidth:1, borderColor:'black', top:50, }}> */}
         <TouchableOpacity onPress={() => props.navigation.navigate('Compass')}
-          style={{ width: 80, flexDirection: 'column', height: 80, shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white', bottom: '53%', left: '10%', borderRadius: 20 }}>
+          style={{ width:'15%', flexDirection: 'column', height: '12%', shadowColor: 'white', elevation: 10, borderWidth: 0
+          , borderColor: 'white', bottom: '48%', left: '20%', borderRadius: 20 }}>
           <NeomorphBlur
             darkShadowColor="#003300" // <- set this
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
+            
           />
-          <Image style={{ height: 70, width: 70, borderRadius: 20, bottom:75, left:6  }} source={require('../assets/compass1.png')}></Image>
-          <Text style={{ bottom:68, left: 11, fontWeight: 'bold', color: '#013220' }}>Compass</Text>
+          <Image style={{ height:'105%', width:'105%', borderRadius: 20, bottom:'100%', right:'5%'  }} source={require('../assets/compas.png')}></Image>
+          
+          <Text style={{ bottom:'96%', left: '3%', fontWeight: 'bold', color: '#013220',fontSize:13 }}>Compass</Text>
         </TouchableOpacity>
 
         
         <TouchableOpacity onPress={() => props.navigation.navigate('Expense')}
           style={{
-            bottom: '69%', left: '40%', width: 80, flexDirection: 'column', height: 80, shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white',
+            bottom: '60%', left: '42%',height:'10%',width:'14%',  flexDirection: 'column',  shadowColor: 'white', elevation: 10
+            , borderWidth: 0, borderColor: 'white',
             borderRadius: 20
           }}>
           <NeomorphBlur
@@ -146,25 +149,30 @@ const ListScreen = (props) => {
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ height: 70, width: 70, borderRadius: 20, bottom: 75, left: 4 }} source={require('../assets/Expense5.png')}></Image>
-          <Text style={{ bottom:68, left: 14, fontWeight: 'bold', color: '#013220' }}>Expense Tracker</Text>
+          <Image style={{ height:'75%', width: '75%', borderRadius: 10, bottom: '95%', left: '8%' }} source={require('../assets/Expense5.png')}></Image>
+          <Text style={{ bottom:35, left: 9, fontWeight: 'bold', color: '#013220',fontSize:13 }}>Expense Tracker</Text>
 
         </TouchableOpacity>
-
-
         <TouchableOpacity onPress={() => props.navigation.navigate('Notes')}
-          style={{
-            bottom: '85%', left: '70%', width: 80, flexDirection: 'column', height: 80, shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white',
-            borderRadius: 20
-          }}>
+          style={{ width: '15%', height: '12%', shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white', bottom:'70%', left: '64%', borderRadius: 20, }}>
           <NeomorphBlur
-            darkShadowColor="#003300" // <- set this
+            darkShadowColor="#003300"
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ height:60, width:60, borderRadius: 1, bottom: 75, left: 13 }} source={require('../assets/Text.png')}></Image>
-          <Text style={{ bottom:55, left: 14, fontWeight: 'bold', color: '#013220' }}>NOTES</Text>
+          <Image style={{ bottom: '85%', left: '15%',height:'70%', width: '70%', borderRadius: 1 }} source={require('../assets/Text.png')}></Image>
+          <Text style={{ bottom:'68%', left: '15%', fontWeight: 'bold', color: '#013220',fontSize:13 }}>Notes</Text>
+        </TouchableOpacity>
 
+        <TouchableOpacity onPress={() => props.navigation.navigate('Quiz')}
+          style={{ width: '15%', height: '12%', shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white', bottom:'60%', left: '20%', borderRadius: 20, }}>
+          <NeomorphBlur
+            darkShadowColor="#003300"
+            lightShadowColor="#3344FF"
+            style={styles1.Icon_Style}
+          />
+          <Image style={{ bottom: '85%', left: '15%',height:'70%', width: '70%', borderRadius: 1 }} source={require('../assets/Text.png')}></Image>
+          <Text style={{ bottom:'68%', left: '15%', fontWeight: 'bold', color: '#013220',fontSize:13 }}>Quiz</Text>
         </TouchableOpacity>
 
 
@@ -187,6 +195,7 @@ const styles1 = StyleSheet.create({
     top: 40,
     left: 80,
     borderRadius: 20,
+    
   },
 
   Icon_Style: {
@@ -194,8 +203,9 @@ const styles1 = StyleSheet.create({
     shadowRadius: 5,
     borderRadius: 20,
     backgroundColor: 'white',
-    width: 80,
-    height: 80,
+    width: 57,
+    height: 55,
+    
     
 
   }
