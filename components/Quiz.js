@@ -4,7 +4,8 @@ import { COLORS, SIZES } from '../constants';
 import data from '../components/Quizdata';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Quiz = () => {
+
+const Quiz = (props) => {
 
     const allQuestions = data;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -67,8 +68,23 @@ const Quiz = () => {
     const renderQuestion = () => {
         return (
             <View style={{
-                marginVertical: 40
+                marginVertical: 50
             }}>
+                <TouchableOpacity
+                    style={{ justifyContent: 'center', alignItems: 'flex-end', left:'85%', width: 50 , bottom:'55%'}}
+                   
+                        onPress={() => props.navigation.navigate('Icons')
+                      }
+                >
+                    <Image
+                        source={require('..//assets/wr.png')}
+                        style={{
+                            width: 25,
+                            height: 25,
+                            tintColor: "white"
+                        }}
+                    />
+                </TouchableOpacity>
                 {/* Question Counter */}
                 <View style={{
                     flexDirection: 'row',
@@ -174,6 +190,7 @@ const Quiz = () => {
     const renderProgressBar = () => {
         return (
             <View style={{
+                top:'7%',
                 width: '100%',
                 height: 20,
                 borderRadius: 20,

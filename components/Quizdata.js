@@ -10,7 +10,7 @@ export default data = [
         correct_option: "Nexus"
     },
     {
-        question: "Which of the following programming language is used to create programs like applets?",
+        question: "Which programming language is used to create programs like applets?",
         options: [ "COBOL", "C Language", "Java", "BASIC"],
         correct_option: "Java"
     },
