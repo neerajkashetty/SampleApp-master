@@ -122,7 +122,7 @@ const Todo = () => {
           <TouchableOpacity onPress={() => markTodoComplete(todo.id)}>
             <View style={[styles.actionIcon, {backgroundColor: 'green'}]}>
               {/* <Icon name="done" size={20} color="white" /> */}
-              <Image  style={styles.image1}  source={require('../assets/add.png')}>
+              <Image  style={styles.image1}  source={require('../assets/plus.png')}>
           </Image>
             </View>
           </TouchableOpacity>

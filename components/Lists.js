@@ -153,7 +153,7 @@ const ListScreen = (props) => {
           <Text style={{ bottom:35, left: 9, fontWeight: 'bold', color: '#013220',fontSize:13 }}>Expense Tracker</Text>
 
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Notes')}
+        <TouchableOpacity onPress={() => props.navigation.navigate('Todo')}
           style={{ width: '15%', height: '12%', shadowColor: 'white', elevation: 10, borderWidth: 0, borderColor: 'white', bottom:'70%', left: '64%', borderRadius: 20, }}>
           <NeomorphBlur
             darkShadowColor="#003300"
@@ -171,7 +171,7 @@ const ListScreen = (props) => {
             lightShadowColor="#3344FF"
             style={styles1.Icon_Style}
           />
-          <Image style={{ bottom: '85%', left: '15%',height:'70%', width: '70%', borderRadius: 1 }} source={require('../assets/Text.png')}></Image>
+          <Image style={{ bottom: '82%', left: '11%',height:'70%', width: '70%', borderRadius: 1 }} source={require('../assets/quiz.png')}></Image>
           <Text style={{ bottom:'68%', left: '15%', fontWeight: 'bold', color: '#013220',fontSize:13 }}>Quiz</Text>
         </TouchableOpacity>
 
